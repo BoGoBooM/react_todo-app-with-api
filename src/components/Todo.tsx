@@ -15,6 +15,8 @@ interface Props {
 
 // Todo component
 export const Todo: FC<Props> = ({ todo, onDelete, onEdit, idsProccesing }) => {
+  const { completed, id, title } = todo;
+
   const {
     handleCompleted, // Handle completion status change
     handleDelete, // Handle deletion of todo
@@ -28,24 +30,24 @@ export const Todo: FC<Props> = ({ todo, onDelete, onEdit, idsProccesing }) => {
     <div
       data-cy="Todo"
       className={cn('todo', {
-        completed: todo.completed, // Add 'completed' class if todo is completed
+        completed: completed, // Add 'completed' class if todo is completed
       })}
-      key={todo.id}
+      key={id}
     >
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
           type="checkbox"
           className="todo__status"
-          onChange={() => handleCompleted(!todo.completed)} // Handle status change
-          checked={todo.completed}
+          onChange={() => handleCompleted(!completed)} // Handle status change
+          checked={completed}
         />
       </label>
 
       {isEditing ? (
         <div onKeyUp={({ key }) => key === 'Escape' && setIsEditing(false)}>
           <TodoForm
-            title={todo.title}
+            title={title}
             onSubmit={handleTitleEdit} // Handle title edit submit
             inputRef={inputRef}
           />
@@ -56,7 +58,7 @@ export const Todo: FC<Props> = ({ todo, onDelete, onEdit, idsProccesing }) => {
           className="todo__title"
           onDoubleClick={() => setIsEditing(true)} // Enable editing on double click
         >
-          {todo.title}
+          {title}
         </span>
       )}
 
@@ -74,7 +76,7 @@ export const Todo: FC<Props> = ({ todo, onDelete, onEdit, idsProccesing }) => {
       <div
         data-cy="TodoLoader"
         className={cn('modal overlay', {
-          'is-active': idsProccesing.includes(todo.id), // Show loader if processing
+          'is-active': idsProccesing.includes(id), // Show loader if processing
         })}
       >
         <div className="modal-background has-background-white-ter" />

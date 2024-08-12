@@ -9,7 +9,7 @@ import {
   getTodos,
   patchTodo,
 } from './api/todos';
-import { List } from './components/List';
+import { TodoList } from './components/TodoList';
 import { Error as ErrorMessage } from './components/Error';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
@@ -229,7 +229,7 @@ export const App: React.FC = () => {
           todosCount={todosCount}
         />
 
-        <List
+        <TodoList
           onDelete={handleDeleteTodo}
           onEdit={handleEditTodo}
           todos={filterTodos}
@@ -237,7 +237,7 @@ export const App: React.FC = () => {
           idsProccesing={idsProcessing}
         />
 
-        {todos.length > 0 && (
+        {todos.length && (
           <Footer
             onFilter={setFilter}
             onClear={clearCompletedTodos}

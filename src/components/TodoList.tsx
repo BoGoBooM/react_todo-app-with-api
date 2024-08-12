@@ -13,7 +13,7 @@ interface Props {
   idsProccesing: number[];
 }
 
-export const List: FC<Props> = ({
+export const TodoList: FC<Props> = ({
   todos,
   tempTodoTitle,
   onDelete,
